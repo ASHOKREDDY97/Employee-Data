@@ -1,0 +1,110 @@
+{% extends "base.html" %} {% block title %}Add New Employee Records{% endblock title %} {% block content %}
+<div class="col-md-12">
+
+    <style>
+        .container {
+            /* border: 2px outset black; */
+            background-color: lightblue;
+        }
+    </style>
+
+    <form method="POST" class="post-form">
+
+        {% csrf_token %}
+
+        <div class="container">
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <h3 style="color: rgb(248, 133, 30);">Update Details:</h3>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Status:</label>
+                <div class="col-sm-4">
+                    {{ employee.status }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">EmployeeId:</label>
+                <div class="col-sm-4">
+                    {{ employee.emp_id }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">ResourceName:</label>
+                <div class="col-sm-4">
+                    {{ employee.resource_name }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Practice:</label>
+                <div class="col-sm-4">
+                    {{ employee.practice }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Department:</label>
+                <div class="col-sm-4">
+                    {{ employee.department }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">ReportingManagers:</label>
+                <div class="col-sm-4">
+                    {{ employee.reporting_managers }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">PracticeLead:</label>
+                <div class="col-sm-4">
+                    {{ employee.practice_lead }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">DateOfJoining:</label>
+                <div class="col-sm-4">
+                    {{ employee.date_of_joining }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Location:</label>
+                <div class="col-sm-4">
+                    {{ employee.location }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">MtExperience:</label>
+                <div class="col-sm-4">
+                    {{ employee.mt_experience }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">NonMtExperience:</label>
+                <div class="col-sm-4">
+                    {{ employee.non_mt_experience }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Gender:</label>
+                <div class="col-sm-4">
+                    {{ employee.gender }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Grade:</label>
+                <div class="col-sm-4">
+                    {{ employee.grade }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-success btn-lg">Update</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    {% endblock content %}
