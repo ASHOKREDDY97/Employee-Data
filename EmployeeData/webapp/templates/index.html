@@ -8,12 +8,16 @@
 </style>
 <div class="col-md-12">
     <h2>Add Employee Details: </h2>
+
     <!-- <div class="alert alert-{{ message.tag }}" role="alert" id="message_container">
         <p {% if message.tags %} class="" {% endif %}>{{message}}</p>
 
     </div> -->
-    <span> <a class="btn btn-primary" href="http://127.0.0.1:8000/upload" role="button">BulkUpload</a></span>
 
+    {% if user.is_superuser %}
+    <p></p>
+    {% else %}
+    <a href="{% url 'logout' %}" class="btn btn-alert">Logout</a> {% endif %}
     <form method="POST" class="post-form" action="/addnew">
         {% csrf_token %}
 

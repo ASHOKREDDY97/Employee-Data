@@ -19,16 +19,16 @@ class EmployeeForm(ModelForm):
             'status':forms.Select(attrs={'class':'form-control',}),
             'emp_id':forms.NumberInput(attrs={'class':'form-control',}),
             'resource_name':forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
-            'practice':forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
-            'department':forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
+            'practice':forms.Select(attrs={'class':'form-control'}),
+            'department':forms.Select(attrs={'class':'form-control', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
             'reporting_managers':forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
-            'practice_lead':forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
+            'practice_lead':forms.Select(attrs={'class':'form-control'}),
             'date_of_joining':forms.widgets.DateInput(attrs={'type': 'date'}),
             'location':forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}),
             'mt_experience':forms.NumberInput(attrs={'class':'form-control'}),
-            'non_mt_experience':forms.NumberInput(attrs={'class':'form-control'}),
+            'non_mt_experience':forms.NumberInput(attrs={'class':'form-control','placeholder': 'optional'}),
             'gender':forms.Select(attrs={'class':'form-control'}),
-            'grade':forms.TextInput(attrs={'class':'form-control'}) 
+            'grade':forms.TextInput(attrs={'class':'form-control','placeholder': 'optional'}) 
         }
 
         # def clean_emp(self,emp_id):

@@ -6,7 +6,11 @@
     <h4 style="color: rgb(248, 133, 80);"> Employee Details:</h4>
     <div>
         <div class="d-inline p-2 text-white"><a href="/addnew" class="btn btn-primary">Add New Record</a></div>
-        <div class="d-inline p-2 text-right logout-class">Hello, {{request.user}} &nbsp;<a href="{% url 'logout' %}" class="btn btn-alert">Logout</a></div>
+        <br>
+        <span> <a class="btn btn-primary" href="http://127.0.0.1:8000/upload" role="button">BulkUpload</a></span>
+        <div class="d-inline p-2 text-right logout-class">Hello, {{request.user}} &nbsp;
+            <a href="{% url 'logout' %}" class="btn btn-alert">Logout</a></div>
+
     </div>
 
     <style>

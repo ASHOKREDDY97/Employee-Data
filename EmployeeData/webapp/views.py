@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 
 # Upload Data from Excel Sheet
+@login_required(login_url='login')
 def dataupload(request):
     if request.method=='POST':
         employee_resource=EmployeeResource()
@@ -65,7 +66,12 @@ def register(request):
 # Employee Login
 def loginpage(request, form=None):
     if request.user.is_authenticated:
-        return redirect('index')
+        print(request.user.is_superuser)
+        if request.user.is_superuser:
+            return redirect('index')
+        else:
+            return redirect('addnew')
+
     else:
         if request.method == 'POST':
             username =request.POST.get('username')
@@ -75,7 +81,10 @@ def loginpage(request, form=None):
 
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                if request.user.is_superuser:
+                    return redirect('index')
+                else:
+                    return redirect('addnew')
             else:
                 messages.info(request, 'username OR password is incorrect')
         return render(request, 'login.html', {'form': form})
@@ -86,11 +95,15 @@ def logoutUser(request):
     return redirect('login')
 
 @login_required(login_url='login')
-def index(request):  
-    employees = EmployeeDetails.objects.all()  
-    return render(request, "show.html", {'employees': employees})
-
+def index(request):
+    if request.user.is_superuser:
+        employees = EmployeeDetails.objects.all()  
+        return render(request, "show.html", {'employees': employees})
+    else:
+        return redirect('addnew')  
+    
 # POST method
+@login_required(login_url='login')
 def addnew(request):  
     if request.method == "POST":  
         form = EmployeeForm(request.POST)  

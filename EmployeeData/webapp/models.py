@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.db.models.enums import Choices
 from django.utils.translation import gettext_lazy as _
 
 class EmployeeDetails(models.Model):
@@ -7,22 +8,24 @@ class EmployeeDetails(models.Model):
         verbose_name_plural = 'EmployeeDetails'
     
     GENDER_CHOICE = (("MALE", "Male"), ("FEMALE", "Female"))
-    STATUS_CHOICE = (("ACTIVE","Active"),("INACTIVE","Inactive"))
+    STATUS_CHOICE = (("ACTIVE","Active"),("INACTIVE","Inactive"),("RESIGN","Resign"))
+    PRACTICE_CHOICE = (("DIGITAL TRANSFORMATION","Digital Transformation"),)
+    DEPARTMENT_CHOICE = (("DEVOPS","DevOps"),("ENTERPRISE APPLICATION DEVELOPMENT","Enterprise Application Development"),("UI","UI"),("CLOUD SOLUTIONS","Cloud Solutions"),("ENTERPRISE ARCHITECTURE","Enterprise Architecture"),("UX","UX"),("PRODUCT ENGINEERING","Product Engineering"),("MOBILITY","Mobility"),("PROFESSIONAL SERVICES","Professional Services"))
+    PRACTICE_LEAD_CHOICE = (("SURESH TUKARAM SUTAR","Suresh Tukaram SUTAR"),("SAILAJA GUDALA","Sailaja GUDALA"),("SRINIVAS KANTTUGA","Srinivas KATTUNGA"),("ABHIJEET BHIKAJI PATIL","Abhijeet Bhikaji PATIL"),("SANJAY PARMANAND BATHEJA","Sanjay Parmanand BATHEJA"),("YYOMA DILIP PATHAK","Vyoma Dilip PATHAK"),("ABHIJEET HARISHCHANDRA ALONE","Abhijeet Harishchandra ALONE"),("NASIR AHMED R","Nasir Ahmed R"))
 
-    
-    status = models.CharField(max_length=100,choices = STATUS_CHOICE,default='active')
-    emp_id=models.IntegerField(primary_key=True)
-    resource_name = models.CharField(max_length=100)
-    practice = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    reporting_managers = models.CharField(max_length=100)
-    practice_lead = models.CharField(max_length=100)
-    date_of_joining = models.DateField(null=True)
-    location = models.CharField(max_length=100)
-    mt_experience = models.FloatField(max_length=100)
-    non_mt_experience = models.FloatField(max_length=100)
-    gender = models.CharField(max_length=100,choices = GENDER_CHOICE, default='active')
-    grade = models.CharField(max_length=100)
+    status = models.CharField(max_length=100,choices = STATUS_CHOICE,null=True)
+    emp_id=models.IntegerField(primary_key=True,null=False)
+    resource_name = models.CharField(max_length=100,null=True)
+    practice = models.CharField(max_length=100,choices=PRACTICE_CHOICE,default="Digital Transformation",null=True)
+    department = models.CharField(max_length=100,choices=DEPARTMENT_CHOICE,null=True)
+    reporting_managers = models.CharField(max_length=100,null=True)
+    practice_lead = models.CharField(max_length=100,choices=PRACTICE_LEAD_CHOICE,null=True)
+    date_of_joining = models.DateField(blank=True , null=True)
+    location = models.CharField(max_length=100,null=True)
+    mt_experience = models.FloatField(max_length=100,null=True)
+    non_mt_experience = models.FloatField(max_length=100,blank=True , null=True)
+    gender = models.CharField(max_length=100,choices=GENDER_CHOICE,null=True)
+    grade = models.CharField(max_length=100,blank=True , null=True)
     
     def __str__(self):
         return self.resource_name  
