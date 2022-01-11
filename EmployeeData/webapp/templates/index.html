@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Add New Employee Records{% endblock title %} {% block content %}
+{% extends "base.html" %} {% block title %}Add New Employee Records{% endblock title %} {% block content %}{% load static %}
 
 <style>
     .container {
@@ -6,8 +6,10 @@
         background-color: lightblue;
     }
 </style>
+
 <div class="col-md-12">
     <h2>Add Employee Details: </h2>
+
 
     <!-- <div class="alert alert-{{ message.tag }}" role="alert" id="message_container">
         <p {% if message.tags %} class="" {% endif %}>{{message}}</p>
@@ -17,7 +19,7 @@
     {% if user.is_superuser %}
     <p></p>
     {% else %}
-    <a href="{% url 'logout' %}" class="btn btn-alert">Logout</a> {% endif %}
+    <a href="{% url 'logout' %}" class='btn btn-success pull-right'>Logout</a> {% endif %}
     <form method="POST" class="post-form" action="/addnew">
         {% csrf_token %}
 

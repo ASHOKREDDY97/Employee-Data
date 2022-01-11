@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .resource import EmployeeResource
 from .forms import EmployeeForm,CreateUserForm
-from .models import EmployeeDetails
+from .models import EmployeeDetails,EmployeeUserDetails
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -14,6 +14,7 @@ from django.core.exceptions import ValidationError
 # Upload Data from Excel Sheet
 @login_required(login_url='login')
 def dataupload(request):
+ if request.user.is_superuser:
     if request.method=='POST':
         employee_resource=EmployeeResource()
         dataset=Dataset()
@@ -47,6 +48,8 @@ def dataupload(request):
             value.save()    
         messages.success(request,'file is uploaded')
     return render(request,'upload.html')
+ else:
+        return redirect('addnew')
 
 # Employee Register
 def register(request):
@@ -110,11 +113,22 @@ def addnew(request):
         if form.is_valid():
             user = EmployeeDetails.objects.filter(emp_id=form.cleaned_data['emp_id'])
             if user.exists():
-                messages.success(request,'Employee with same Id is already Exists')
+                messages.error(request,'Employee with same Id is already Exists')
                 return render(request,'index.html',{'form':form})
 
             try:  
-                form.save()  
+               
+                if request.user.is_superuser:
+                    pass
+                else:
+                    qs,created = EmployeeUserDetails.objects.get_or_create(user = request.user,form_submitted = True)
+                    if not created:
+                        messages.success(request,'Form has been already submitted')
+                        return render(request,'index.html',{'form':form})
+                form.save()
+
+        
+                messages.success(request,'Form has been submitted')
                 return redirect('/')  
             except:
                 pass 
@@ -126,8 +140,7 @@ def addnew(request):
 @login_required(login_url=login)
 def edit(request, id):                         
     employee_obj = EmployeeDetails.objects.get(emp_id=id) 
-    print(employee_obj)          
-    print(request)
+            
     if request.method == 'POST':
         print(request.POST)
         form = EmployeeForm(request.POST, instance=employee_obj)
