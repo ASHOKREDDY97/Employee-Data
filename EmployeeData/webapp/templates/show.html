@@ -7,7 +7,9 @@
     <div>
         <div class="d-inline p-2 text-white"><a href="/addnew" class="btn btn-primary">Add New Record</a></div>
         <br>
-        <span> <a class="btn btn-primary" href="http://127.0.0.1:8000/upload" role="button">BulkUpload</a></span>
+        <span> <a class="btn btn-primary" href="http://127.0.0.1:8000/upload" role="button">BulkUpload</a></span> {% if request.path == '/' %}
+        <a href="{% url 'inactive_employees' %}" class='btn btn-primary pull-right'>View Inactive Employees</a> {% else %}
+        <a href="{% url 'index' %}" class='btn btn-primary pull-right'>View Active/Resigned Employees</a> {% endif %}
         <div class="d-inline p-2 text-right logout-class">Hello, {{request.user}} &nbsp;
             <a href="{% url 'logout' %}" class="btn btn-alert">Logout</a></div>
 
@@ -35,6 +37,7 @@
             height: 80px;
         }
     </style>
+
 
     {% if messages %} {% for message in messages %}
     <div class="alert alert-dismissible alert-success">

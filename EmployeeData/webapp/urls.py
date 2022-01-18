@@ -10,4 +10,6 @@ urlpatterns = [
     path('login/', views.loginpage, name='login'),
     path('logout', views.logoutUser, name='logout'),
     path('upload/', views.dataupload),
+    path('inactive_employees',views.inactive_employees,name='inactive_employees'),
+    
 ]

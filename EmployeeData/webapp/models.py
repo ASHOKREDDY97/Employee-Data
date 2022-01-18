@@ -27,15 +27,13 @@ class EmployeeDetails(models.Model):
     gender = models.CharField(max_length=100,choices=GENDER_CHOICE,null=True)
     grade = models.CharField(max_length=100,blank=True , null=True)
 
-    
     def __str__(self):
         return self.resource_name  
+
 
 class EmployeeUserDetails(models.Model):
     class Meta:
         verbose_name_plural = 'EmployeeUserDetails'
-
-    
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     form_submitted = models.BooleanField(blank=True, null=True, default=False)
     

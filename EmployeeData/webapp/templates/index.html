@@ -6,7 +6,15 @@
         background-color: lightblue;
     }
 </style>
-
+<script>
+    $('id_date_of_joining').datepicker({
+        dateFormat: "dd/MM/yy",
+        changeMonth: true,
+        changeYear: true,
+        ignoreReadonly: true,
+        maxDate: 'now'
+    });
+</script>
 <div class="col-md-12">
     <h2>Add Employee Details: </h2>
 

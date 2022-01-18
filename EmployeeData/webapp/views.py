@@ -100,10 +100,21 @@ def logoutUser(request):
 @login_required(login_url='login')
 def index(request):
     if request.user.is_superuser:
-        employees = EmployeeDetails.objects.all()  
+        filter_tuple = ("inactive", "INACTIVE")
+        employees = EmployeeDetails.objects.exclude(status__in=filter_tuple) 
+        return render(request, "show.html", {'employees': employees})
+    else:
+        return redirect('addnew')
+
+@login_required(login_url='login')
+def inactive_employees(request):
+    if request.user.is_superuser:
+        filter_tuple = ("inactive", "INACTIVE")
+        employees = EmployeeDetails.objects.filter(status__in=filter_tuple) 
         return render(request, "show.html", {'employees': employees})
     else:
         return redirect('addnew')  
+    
     
 # POST method
 @login_required(login_url='login')
@@ -127,7 +138,6 @@ def addnew(request):
                         return render(request,'index.html',{'form':form})
                 form.save()
 
-        
                 messages.success(request,'Form has been submitted')
                 return redirect('/')  
             except:
