@@ -6,7 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.fields import DateField
 from django.core.exceptions import ValidationError
-
+import datetime
+from django.core.exceptions import ValidationError
 
 class EmployeeForm(ModelForm):
  
@@ -71,6 +72,14 @@ class EmployeeForm(ModelForm):
     #     if qs.exists():
     #         raise forms.ValidationError("Employye Id is already Exists")
     #     return emp_id
+
+
+    
+    def clean_date(self):
+        date = self.cleaned_data['date_of_joining']
+        if date < datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the past!")
+        return date
 
 
 class CreateUserForm(UserCreationForm):
