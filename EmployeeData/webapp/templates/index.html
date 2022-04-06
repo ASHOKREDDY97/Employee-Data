@@ -8,13 +8,16 @@
 </style>
 <script>
     $(function() {
-        $('.id_date_of_joining').datepicker({
-            format: 'mm-dd-yyyy',
-            endDate: '+0d',
-            autoclose: true
-        });
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+
+        $('id_date_of_joining').attr('min', maxDate);
     });
 </script>
+
 <div class="col-md-12">
     <h2>Add Employee Details: </h2>
 
@@ -30,8 +33,6 @@
     <a href="{% url 'logout' %}" class='btn btn-success pull-right'>Logout</a> {% endif %}
     <form method="POST" class="post-form" action="/addnew">
         {% csrf_token %}
-
-
 
         <div class="container">
             <br>
@@ -126,6 +127,7 @@
                 <label class="col-sm-1 col-form-label"></label>
                 <div class="col-sm-4">
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- <a href="{% url 'submit' %}" class='btn btn-success pull-right'>Submit</a> -->
                 </div>
             </div>
         </div>

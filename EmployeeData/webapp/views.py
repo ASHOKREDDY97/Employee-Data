@@ -167,3 +167,6 @@ def destroy(request, id):
     employee = EmployeeDetails.objects.get(emp_id=id)  
     employee.delete()  
     return redirect("/") 
+
+def submit(request):
+     return render(request, 'submit.html')

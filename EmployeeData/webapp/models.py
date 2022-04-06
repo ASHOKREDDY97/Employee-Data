@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.db.models.enums import Choices
@@ -66,5 +67,5 @@ class EmployeeUserDetails(models.Model):
 # def validate_name(resource_name):
 #     print(resource_name.isalpha())
 
-#     
+
 

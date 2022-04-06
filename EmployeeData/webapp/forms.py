@@ -75,11 +75,18 @@ class EmployeeForm(ModelForm):
 
 
     
-    def clean_date(self):
-        date = self.cleaned_data['date_of_joining']
-        if date < datetime.date.today():
-            raise forms.ValidationError("The date cannot be in the past!")
-        return date
+    # def clean_date(self):
+    #     date = self.cleaned_data['date_of_joining']
+    #     if date < datetime.date.today():
+    #         raise forms.ValidationError("The date cannot be in the past!")
+    #     return date
+
+
+    def experience(self):
+      import datetime
+      if (datetime.date.today() - self.date_of_joining):
+        print('experience')
+
 
 
 class CreateUserForm(UserCreationForm):
